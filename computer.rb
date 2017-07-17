@@ -1,9 +1,10 @@
 class Computer
-  def initialize(*args)
-    @marker = args[0]
+  attr_accessor :marker
+  def initialize(marker)
+    @marker = marker
   end
 
-  def self oponent_marker
+  def oponent_marker
     if @marker  == "X"
       @oponent_marker = "O"
     else
@@ -16,7 +17,7 @@ class Computer
     until spot
       if @board[4] == "4"
         spot = 4
-        @board[spot] = marker
+        @board[spot] = @marker
       else
         spot = get_best_move(@board, @marker)
         if @board[spot] != "X" && @board[spot] != "O"
