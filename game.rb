@@ -1,89 +1,48 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
+  end
+
+  def select_game_mode
+    # player enter a number between 1 and 3 to choose game mode
+    mode = ""
+    while (mode != 1 && mode != 2 && mode != 3)
+      puts "Select game mode:
+            1. Human x Human
+            2. Human x PC
+            3. PC X PC"
+      mode = gets.chomp.to_i
+      if (mode != 1 && mode != 2 && mode != 3)
+        puts "Invalid option"
+      end
+    end
+    select_game_mode = mode
   end
 
   def start_game
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} |#{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     puts "Choose a place in the board pressing a number between 0 and 8.:"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
-      get_human_spot
-      if !game_is_over(@board) && !tie(@board)
-        eval_board
+
+      if select_game_mode == 3
+        @comp1.eval_board
+      else
+        @player1.get_spot
       end
+       if !game_is_over(@board) && !tie(@board)
+         if select_game_mode == 1
+           player2.get_spot
+         else
+           @eval_board
+         end
+       end
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts "Game over"
   end
 
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
-      else if @board[spot] == "X" || @board[spot] == "O"
-        puts "This spot is already occupied, please choose an spot that isn't occupied already"
-      else
-        spot = nil
-        puts "Invalid play, to choose a place in the board press a number between 0 and 8."
-      end
-    end
-  end
-
-  def eval_board
-    spot = nil
-    until spot
-      if @board[4] == "4"
-        spot = 4
-        @board[spot] = @com
-      else
-        spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
-        else
-          spot = nil
-        end
-      end
-    end
-  end
-
-  def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
-    best_move = nil
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
-    available_spaces.each do |as|
-      board[as.to_i] = @com
-      if game_is_over(board)
-        best_move = as.to_i
-        board[as.to_i] = as
-        return best_move
-      else
-        board[as.to_i] = @hum
-        if game_is_over(board)
-          best_move = as.to_i
-          board[as.to_i] = as
-          return best_move
-        else
-          board[as.to_i] = as
-        end
-      end
-    end
-    if best_move
-      return best_move
-    else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
-    end
-  end
 
   def game_is_over(b)
 
@@ -100,9 +59,26 @@ class Game
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
   end
-
 end
 
-
+require_relative 'player'
+require_relative 'computer'
 game = Game.new
+case
+when game.select_game_mode == 1
+  @player1 = Player.new("O")
+  @player2 = Player.new("X")
+  puts "Human x Human mode selected. Player 1: #{@player1.marker}.\n
+  player2: #{@player2.marker}"
+when game.select_game_mode == 2
+  @player1 = Player.new("O")
+  @comp1 = Computer.new("O")
+  puts "Human x Computer mode selected. Player 1: #{@player1.marker}.\n
+  Computer: #{@comp1.marker}"
+else
+  @comp1 = Computer.new("O")
+  @comp2 = Computer.new("X")
+  puts "Computer x Computer mode selected. Computer 1: #{@comp1.marker}.\n
+  Computer 2: #{@comp2.marker}"
+end
 game.start_game
