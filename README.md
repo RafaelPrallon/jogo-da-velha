@@ -6,13 +6,13 @@ Esse é um desafio que queremos que você supere. Iremos julgar pelos critérios
 
 O arquivo game.rb é o clássico jogo da velha. Contudo, o código está uma bagunça e há vários problemas que podem ser melhorados como:
 
- - O tratamento de entradas não válidas é ruim;
- - Falta de mensagens interativas com os jogadores.
+ - O tratamento de entradas não válidas é ruim; <- "Tratado"
+ - Falta de mensagens interativas com os jogadores. <- "Tratado em parte mas pode melhorar"
 
 Também gostaríamos de acrescentar algumas funcionalidades novas como:
 
  - Permitir que o jogador escolha o nível de dificuldade, hoje está sempre no difícil (hard);
- - Permitir que fosse possível a escolha de tipos de jogos diferentes (humano vs. humano, computador vs. computado e humando vs. computador).
+ - Permitir que fosse possível a escolha de tipos de jogos diferentes (humano vs. humano, computador vs. computado e humando vs. computador). <- "Em implementação no branch PlayerClass mas há erros, provavelmente erros simples"
 
 Você consegue nos ajudar a finalizar o jogo?
 

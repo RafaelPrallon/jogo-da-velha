@@ -19,9 +19,9 @@ class Game
     select_game_mode = mode
   end
 
-  def start_game
+  def start_game(mode)
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n\n"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
 
@@ -39,12 +39,12 @@ class Game
          elsif mode == 2
             puts "Computer 1's turn"
             @comp1.eval_board
-          else
+         else
             puts "Computer 2's turn"
             @comp2.eval_board
          end
        end
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n\n"
     end
     puts "Game over"
   end
@@ -76,17 +76,17 @@ if mode == 1
   @player1 = Player.new("O")
   @player2 = Player.new("X")
   puts "Human x Human mode selected. Player 1: #{@player1.marker}
-                             Player 2: #{@player2.marker}"
+                             Player 2: #{@player2.marker}\n\n"
 elsif mode == 2
   @player1 = Player.new("O")
   @comp1 = Computer.new("X")
   puts "Human x Computer mode selected. Player 1: #{@player1.marker}
-                                   Computer: #{@comp1.marker}"
+                                   Computer: #{@comp1.marker}\n\n"
 else
   @comp1 = Computer.new("O")
   @comp2 = Computer.new("X")
   puts "Computer x Computer mode selected. Computer 1: #{@comp1.marker}
-                                   Computer 2: #{@comp2.marker}"
+                                   Computer 2: #{@comp2.marker}\n\n"
 end
 
-game.start_game
+game.start_game(mode)
