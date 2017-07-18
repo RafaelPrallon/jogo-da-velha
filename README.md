@@ -1,9 +1,10 @@
-# Desafio da Pluga
+# Jogo da velha
 
 Código de jogo da velha feito para a resolução do desafio da pluga.
 Para executar a aplicação, execute os seguintes comandos:
 
 git clone https://github.com/RafaelPrallon/jogo-da-velha.git
+
 ruby game.rb
 
 Pontos tratados: 
@@ -23,3 +24,7 @@ Coisas a tratar:
 -> Corrigir bug na implementação do algorítimo de escolha da melhor jogada. Por algum motivo ela agora mantem a casa 0 do tabuleiro marcada mesmo ela tendo escolhido outra casa como a melhor jogada
 
 -> Possível refatorar ainda mais
+
+Coisas que podem ser adicionadas:
+
+-> Implementar a opção de jogo multijogador online por via do dRuby.
