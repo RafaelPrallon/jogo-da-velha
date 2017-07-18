@@ -129,13 +129,13 @@ until continue == "N"
       @player1 = Player.new("O")
       @player2 = Player.new("X")
       puts "Human x Human mode selected. Player 1: #{@player1.marker}
-                                 Player 2: #{@player2.marker}\n\n"
+                             Player 2: #{@player2.marker}\n\n"
     elsif mode == 2
       difficulty = game.select_difficulty
       @player1 = Player.new("O")
       @player2 = Computer.new("X")
       puts "Human x Computer mode selected. Player 1: #{@player1.marker}
-                                       Computer: #{@player2.marker}\n\n"
+                                   Computer: #{@player2.marker}\n\n"
     else
       difficulty = game.select_difficulty
       @player1 = Computer.new("O")
