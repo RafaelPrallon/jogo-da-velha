@@ -1,23 +1,29 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @difficulty = nil
+    @result = "defeat"
     @com = "X" # the computer's marker
     @hum = "O" # the user's marker
   end
 
-  def start_game
+  def start_game(difficulty)
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} |#{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     puts "Choose a place in the board pressing a number between 0 and 8.:"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
       get_human_spot
       if !game_is_over(@board) && !tie(@board)
-        eval_board
+        eval_board(difficulty)
+      elsif game_is_over(@board)
+        result = "victory"
+      elsif tie(@board)
+        result = "tie"
       end
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
-    puts "Game over"
+    display_results(result)
   end
 
   def get_human_spot
@@ -26,7 +32,7 @@ class Game
       spot = gets.chomp.to_i
       if @board[spot] != "X" && @board[spot] != "O"
         @board[spot] = @hum
-      else if @board[spot] == "X" || @board[spot] == "O"
+      elsif @board[spot] == "X" || @board[spot] == "O"
         puts "This spot is already occupied, please choose an spot that isn't occupied already"
       else
         spot = nil
@@ -35,31 +41,46 @@ class Game
     end
   end
 
-  def eval_board
+  def eval_board(difficulty)
     spot = nil
-    until spot
-      if @board[4] == "4"
-        spot = 4
-        @board[spot] = @com
-      else
-        spot = get_best_move(@board, @com)
+    if difficulty == "E"
+      until spot
+        spot = get_bad_move(@board, @com)
         if @board[spot] != "X" && @board[spot] != "O"
           @board[spot] = @com
         else
           spot = nil
         end
       end
+    else
+      until spot
+        if @board[4] == "4"
+          spot = 4
+          @board[spot] = @com
+        else
+          spot = get_best_move(@board, @com)
+          if @board[spot] != "X" && @board[spot] != "O"
+            @board[spot] = @com
+          else
+            spot = nil
+          end
+        end
+      end
     end
   end
-
-  def get_best_move(board, next_player, depth = 0, best_score = {})
+  def get_available_spaces(board)
     available_spaces = []
-    best_move = nil
     board.each do |s|
       if s != "X" && s != "O"
         available_spaces << s
       end
     end
+    return available_spaces
+  end
+
+  def get_best_move(board, next_player, depth = 0, best_score = {})
+    best_move = nil
+    available_spaces = get_available_spaces(board)
     available_spaces.each do |as|
       board[as.to_i] = @com
       if game_is_over(board)
@@ -85,6 +106,13 @@ class Game
     end
   end
 
+  def get_bad_move(board, next_player, depth = 0, best_score = {})
+    bad_move = nil
+    available_spaces = get_available_spaces(board)
+    n = rand(0..available_spaces.count)
+    return available_spaces[n].to_i
+  end
+
   def game_is_over(b)
 
     [b[0], b[1], b[2]].uniq.length == 1 ||
@@ -101,8 +129,31 @@ class Game
     b.all? { |s| s == "X" || s == "O" }
   end
 
+  def display_results(result)
+    if result == "victory"
+      puts "You win\n"
+    elsif result == "tie"
+      puts "It's a draw\n"
+    else
+      puts "You lose\n"
+    end
+  end
 end
 
-
 game = Game.new
-game.start_game
+
+until (@difficulty == "E" || @difficulty == "H")
+  puts "Please select difficulty:
+                        E: Easy mode
+                        H: Hard mode"
+  @difficulty = gets.chomp.to_s.capitalize
+  if (@difficulty != "E" && @difficulty !="H")
+    puts "Invalid option"
+  end
+end
+if @difficulty == "E"
+  puts "Easy mode selected"
+else
+  puts "Hard mode selected"
+end
+game.start_game(@difficulty)
