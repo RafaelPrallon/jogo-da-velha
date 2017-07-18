@@ -1,24 +1,17 @@
 # Desafio da Pluga
 
-Nós da Pluga nos orgulhamos do nosso time e queremos sempre boas pessoas que acrescentem. Por isso gostamos de testar nossos candidatos.
+Código de jogo da velha feito para a resolução do desafio da pluga.
+Para executar a aplicação, execute os seguintes comandos
+git clone 
+ruby game.rb
 
-Esse é um desafio que queremos que você supere. Iremos julgar pelos critérios: Manutenção do código, legibilidade, separação de responsabilidades e expressividade dos nomes.
+Pontos tratados: 
+	-> Implementação de tratamento para os casos em que a entrada é inválida
+	-> Implementação de mensagens mais interativas ao usuário
+	-> Adicionado a opção de selecionar modos de jogo. Estes sendo humano contra humano, humano contra o computador ou computador contra computador
+	-> Adição de um modo fácil e de se selecionar entre as dificuldades
+	-> Adição da opção de se iniciar uma nova partida no final da partida anterior
 
-O arquivo game.rb é o clássico jogo da velha. Contudo, o código está uma bagunça e há vários problemas que podem ser melhorados como:
-
- - O tratamento de entradas não válidas é ruim;
- - Falta de mensagens interativas com os jogadores.
-
-Também gostaríamos de acrescentar algumas funcionalidades novas como:
-
- - Permitir que o jogador escolha o nível de dificuldade, hoje está sempre no difícil (hard);
- - Permitir que fosse possível a escolha de tipos de jogos diferentes (humano vs. humano, computador vs. computado e humando vs. computador).
-
-Você consegue nos ajudar a finalizar o jogo?
-
-Importante:
-
- - Você terá 5 dias para fazer o máximo que puder. Sabemos que o tempo é curto e muito difícil de fazer tudo. Mas faça o máximo que conseguir;
- - Após o término nos envie o link do repositório do Github.
-
-Obrigado e boa sorte! :)
+Coisas a tratar:
+	-> Corrigir bug na implementação do algorítimo de escolha da melhor jogada. Por algum motivo ela agora mantem a casa 0 do tabuleiro marcada mesmo ela tendo escolhido outra casa como a melhor jogada
+	-> Possível refatorar ainda mais
