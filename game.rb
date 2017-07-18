@@ -24,26 +24,29 @@ class Game
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n\n"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
-
+      # given the game mode, it will alternate between player's and pc's turn
       if mode == 3
         puts "Computer 1's turn"
-        @comp1.eval_board
+        @comp1.eval_board(@board)
       else
         puts "Player 1, choose a place in the board pressing a number between 0 and 8.:"
-        @player1.get_spot
+        @player1.get_spot(@board)
       end
-       if !game_is_over(@board) && !tie(@board)
-         if mode == 1
-          puts "Player 2, choose a place in the board pressing a number between 0 and 8.:"
-          @player2.get_spot
-         elsif mode == 2
+       # if the game does not end at the first player's turn,
+       # it becomes the second player's turn
+        if !game_is_over(@board) && !tie(@board)
+          if mode == 1
+            puts "Player 2, choose a place in the board pressing a number between 0 and 8.:"
+            @player2.get_spot
+          elsif mode == 2
             puts "Computer 1's turn"
             @comp1.eval_board
-         else
+          else
             puts "Computer 2's turn"
             @comp2.eval_board
-         end
-       end
+          end
+        end
+      # print the board at the ond of the turn
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n\n"
     end
     puts "Game over"
@@ -51,7 +54,7 @@ class Game
 
 
   def game_is_over(b)
-
+    # checks if a line at the board is drawn with only one symbol
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
     [b[6], b[7], b[8]].uniq.length == 1 ||
@@ -63,6 +66,7 @@ class Game
   end
 
   def tie(b)
+    # if all spots on the board is occupied, it calls a draw
     b.all? { |s| s == "X" || s == "O" }
   end
 end

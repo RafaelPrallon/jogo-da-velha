@@ -12,16 +12,16 @@ class Computer
     end
   end
 
-  def eval_board
+  def eval_board(board)
     spot = nil
     until spot
-      if @board[4] == "4"
+      if board[4] == "4"
         spot = 4
-        @board[spot] = @marker
+        board[spot] = @marker
       else
-        spot = get_best_move(@board, @marker)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @marker
+        spot = get_best_move(board, @marker)
+        if board[spot] != "X" && board[spot] != "O"
+          board[spot] = @marker
         else
           spot = nil
         end

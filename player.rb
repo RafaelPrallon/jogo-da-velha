@@ -3,13 +3,15 @@ class Player
   def initialize (marker)
     @marker = marker
   end
-  def get_spot
+  def get_spot(board)
     spot = nil
     until spot
       spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @marker
-      elsif @board[spot] == "X" || @board[spot] == "O"
+      # if the chosen spot is already occupied, it ask the player to
+      # choose another spot
+      if board[spot] != "X" && board[spot] != "O"
+        board[spot] = @marker
+      elsif board[spot] == "X" || board[spot] == "O"
         puts "This spot is already occupied, please choose an spot that isn't occupied already"
       else
         spot = nil
