@@ -29,7 +29,7 @@ class Computer
     end
   end
 
-  def get_best_move(board, next_player, depth = 0, best_score = {})
+  def get_best_move(board, next_player, depth = 0)
     available_spaces = []
     best_move = nil
     board.each do |s|
@@ -39,13 +39,13 @@ class Computer
     end
     available_spaces.each do |as|
       board[as.to_i] = @marker
-      if game_is_over(board)
+      if Game.game_is_over(board)
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
         board[as.to_i] = @oponent_marker
-        if game_is_over(board)
+        if Game.game_is_over(board)
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
