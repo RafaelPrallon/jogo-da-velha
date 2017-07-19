@@ -17,25 +17,27 @@ class Computer
     until spot
       # depending on the difficulty, it choose to do either a bad move or the best move
       if difficulty == "E"
-          spot = get_bad_move(board, marker)
-          if board[spot] != "X" && board[spot] != "O"
-            board[spot] = marker
-          else
-            spot = nil
-          end
+        spot = get_bad_move(board, marker)
+        draw_into_board(board, spot, marker)
+      elsif difficulty =="N"
+        spot = get_average_move(board, marker)
+        draw_into_board(board, spot, marker)
       else
           if board[4] == "4"
             spot = 4
             board[spot] = marker
           else
             spot = get_best_move(board, marker)
-            if board[spot] != "X" && board[spot] != "O"
-              board[spot] = marker
-            else
-              spot = nil
-            end
+            draw_into_board(board, spot, marker)
           end
       end
+    end
+  end
+  def draw_into_board(board, spot, marker)
+    if board[spot] != "X" && board[spot] != "O"
+        board[spot] = marker
+        else
+        spot = nil
     end
   end
 
@@ -46,9 +48,10 @@ class Computer
         available_spaces << s
       end
     end
+    return available_spaces
   end
 
-  def get_best_move(board, next_player)
+  def get_best_move(board, next_player, depth = 0, best_score = {})
     best_move = nil
     available_spaces = get_available_spaces(board)
     available_spaces.each do |as|
@@ -75,10 +78,18 @@ class Computer
       return available_spaces[n].to_i
     end
   end
-  def get_bad_move(board, next_player)
+  def get_bad_move(board, next_player, depth = 0, best_score = {})
     bad_move = nil
     available_spaces = get_available_spaces(board)
     n = rand(0..available_spaces.count)
     return available_spaces[n].to_i
+  end
+  def get_average_move(board, next_player, depth = 0, best_score = {})
+    n = rand(0..100)
+    if n < 50
+      return get_bad_move(board, @marker)
+    else
+      return get_best_move(board, @marker)
+    end
   end
 end

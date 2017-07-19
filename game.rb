@@ -45,12 +45,13 @@ class Game
 
   def select_difficulty
     difficulty = nil
-    until (difficulty == "E" || difficulty == "H")
+    until (difficulty == "E" || difficulty == "N" || difficulty == "H")
       puts "Please select difficulty:
                             E: Easy mode
+                            N: Normal mode
                             H: Hard mode"
       difficulty = gets.chomp.to_s.capitalize
-      if (difficulty != "E" && difficulty !="H")
+      if (difficulty != "E" && difficulty !="H" && difficulty != "N")
         puts "Invalid option"
       end
     end
@@ -82,7 +83,7 @@ class Game
       print_board(@board)
       # if the game does not end at the first player's turn,
       # it becomes the second player's turn.
-      if !Game.game_is_over(@board) && !Game.tie(@board)
+      if !(Game.game_is_over(@board)) && !(Game.tie(@board))
         if mode == 1
           puts "Player 2, choose a place in the board pressing a number between 0 and 8.:"
           player2.get_spot(@board)

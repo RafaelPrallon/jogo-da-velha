@@ -15,13 +15,13 @@ Pontos tratados:
 
 -> Adicionado a opção de selecionar modos de jogo. Estes sendo humano contra humano, humano contra o computador ou computador contra computador
 
--> Adição de um modo fácil e de se selecionar entre as dificuldades
+-> Adição de um modo fácil e um modo normal, além do menu para selecionar entre as dificuldades
 
 -> Adição da opção de se iniciar uma nova partida no final da partida anterior
 
 Coisas a tratar:
 
--> Corrigir bug na implementação do algorítimo de escolha da melhor jogada. Por algum motivo ela agora mantem a casa 0 do tabuleiro marcada mesmo ela tendo escolhido outra casa como a melhor jogada
+-> Aparentemente o modo difícil ficou mais fácil. Preciso descobrir o porquê
 
 -> Possível refatorar ainda mais
 
