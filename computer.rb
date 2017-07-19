@@ -2,6 +2,7 @@ class Computer
   attr_accessor :marker
   def initialize(marker)
     @marker = marker
+    oponent_marker
   end
 
   def oponent_marker
@@ -28,6 +29,7 @@ class Computer
             board[spot] = marker
           else
             spot = get_best_move(board, marker)
+            puts "PC chooses #{spot}"
             draw_into_board(board, spot, marker)
           end
       end
@@ -51,7 +53,7 @@ class Computer
     return available_spaces
   end
 
-  def get_best_move(board, next_player, depth = 0, best_score = {})
+  def get_best_move(board, next_player)
     best_move = nil
     available_spaces = get_available_spaces(board)
     available_spaces.each do |as|
@@ -71,20 +73,17 @@ class Computer
         end
       end
     end
-    if best_move
-      return best_move
-    else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
-    end
+    n = rand(0..available_spaces.count)
+    return available_spaces[n].to_i
   end
-  def get_bad_move(board, next_player, depth = 0, best_score = {})
+
+  def get_bad_move(board, next_player)
     bad_move = nil
     available_spaces = get_available_spaces(board)
     n = rand(0..available_spaces.count)
     return available_spaces[n].to_i
   end
-  def get_average_move(board, next_player, depth = 0, best_score = {})
+  def get_average_move(board, next_player)
     n = rand(0..100)
     if n < 50
       return get_bad_move(board, @marker)

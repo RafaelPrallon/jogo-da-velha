@@ -136,13 +136,13 @@ until continue == "N"
       @player1 = Player.new("O")
       @player2 = Computer.new("X")
       puts "Human x Computer mode selected. Player 1: #{@player1.marker}
-                                   Computer: #{@player2.marker}\n\n"
+                                Computer: #{@player2.marker}\n\n"
     else
       difficulty = game.select_difficulty
       @player1 = Computer.new("O")
       @player2 = Computer.new("X")
       puts "Computer x Computer mode selected. Computer 1: #{@player1.marker}
-                                       Computer 2: #{@player2.marker}\n\n"
+                                   Computer 2: #{@player2.marker}\n\n"
     end
     puts "Is that how you want the game?(Y/N)\n "
     confirmation = gets.chomp.capitalize

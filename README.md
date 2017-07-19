@@ -19,11 +19,11 @@ Pontos tratados:
 
 -> Adição da opção de se iniciar uma nova partida no final da partida anterior
 
+-> Remoção de variáveis não utilizadas na função de pegar melhor jogada
+
 Coisas a tratar:
 
--> Aparentemente o modo difícil ficou mais fácil. Preciso descobrir o porquê
-
--> Possível refatorar ainda mais
+-> Aparentemente o modo difícil ficou mais fácil. A parte de prevenir que o jogador adversário vença não está funcionando
 
 Coisas que podem ser adicionadas:
 
