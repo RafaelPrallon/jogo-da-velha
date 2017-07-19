@@ -23,7 +23,7 @@ Pontos tratados:
 
 Coisas a tratar:
 
--> Aparentemente o modo difícil ficou mais fácil. A parte de prevenir que o jogador adversário vença não está funcionando
+-> Para relatar questões ainda não tratadas no código, use a opção de adicionar uma issue na aba de issues.
 
 Coisas que podem ser adicionadas:
 
