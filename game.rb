@@ -68,7 +68,7 @@ class Game
   end
 
   def start_game(mode, difficulty, player1, player2)
-     # at the beggining of each turn, it will print the board
+    # at the beggining of each turn, it will print the board
     print_board(@board)
     # loop through until the game was won or tied
     until Game.game_is_over(@board) || Game.tie(@board)
@@ -144,6 +144,8 @@ until continue == "N"
       puts "Computer x Computer mode selected. Computer 1: #{@player1.marker}
                                    Computer 2: #{@player2.marker}\n\n"
     end
+    # asks the player to confirm if the way displayed at the menu is the way
+    # he wants to play
     puts "Is that how you want the game?(Y/N)\n "
     confirmation = gets.chomp.capitalize
     until (confirmation == "Y" || confirmation == "N")
@@ -152,6 +154,7 @@ until continue == "N"
     end
   end
   game.start_game(mode, difficulty, @player1, @player2)
+  # ask the player if the player wants to play again
   puts "Do you want to play it again?(Y/N)"
   continue = gets.chomp.capitalize
   until (continue == "Y" || continue == "N")

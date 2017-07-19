@@ -2,14 +2,14 @@ class Computer
   attr_accessor :marker
   def initialize(marker)
     @marker = marker
-    oponent_marker
+    opponent_marker
   end
 
-  def oponent_marker
+  def opponent_marker
     if @marker  == "X"
-      @oponent_marker = "O"
+      @opponent_marker = "O"
     else
-      @oponent_marker = "X"
+      @opponent_marker = "X"
     end
   end
 
@@ -29,13 +29,15 @@ class Computer
             board[spot] = marker
           else
             spot = get_best_move(board, marker)
-            puts "PC chooses #{spot}"
             draw_into_board(board, spot, marker)
           end
       end
     end
+    puts "PC chooses #{spot}"
   end
+
   def draw_into_board(board, spot, marker)
+    # it will draw in the board at the position spot if available
     if board[spot] != "X" && board[spot] != "O"
         board[spot] = marker
         else
@@ -63,7 +65,9 @@ class Computer
         board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @oponent_marker
+        # if the opponent is about to win, it will choose the spot the will give
+        # the opponent the victory
+        board[as.to_i] = @opponent_marker
         if Game.game_is_over(board)
           best_move = as.to_i
           board[as.to_i] = as
