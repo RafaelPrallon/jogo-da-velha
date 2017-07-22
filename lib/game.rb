@@ -1,13 +1,12 @@
 class Game
   require_relative 'player'
   require_relative 'computer'
+  require_relative 'menu'
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @difficulty = nil
     @result = "defeat"
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
   end
 
   def self.game_is_over(b)
@@ -25,42 +24,6 @@ class Game
   def self.tie(b)
     # if all spots on the board is occupied, it calls a draw
     b.all? { |s| s == "X" || s == "O" }
-  end
-
-  def select_game_mode
-    # player enter a number between 1 and 3 to choose game mode
-    mode = nil
-    until (mode == 1 || mode == 2 || mode == 3)
-      puts "Select game mode:
-            1. Human x Human
-            2. Human x PC
-            3. PC X PC"
-      mode = gets.chomp.to_i
-      if (mode != 1 && mode != 2 && mode != 3)
-        puts "Invalid option"
-      end
-    end
-    select_game_mode = mode
-  end
-
-  def select_difficulty
-    difficulty = nil
-    until (difficulty == "E" || difficulty == "N" || difficulty == "H")
-      puts "Please select difficulty:
-                            E: Easy mode
-                            N: Normal mode
-                            H: Hard mode"
-      difficulty = gets.chomp.to_s.capitalize
-      if (difficulty != "E" && difficulty !="H" && difficulty != "N")
-        puts "Invalid option"
-      end
-    end
-    if difficulty == "E"
-      puts "Easy mode selected"
-    else
-      puts "Hard mode selected"
-    end
-    select_difficulty = difficulty
   end
 
   def print_board(board)
@@ -123,7 +86,7 @@ until continue == "N"
   game = Game.new
   confirmation = "N"
   until confirmation =="Y"
-    mode = game.select_game_mode
+    mode = Menu.select_game_mode
     # based on the result of select_game_mode, @player1 and @player2 will be either
     # of the player class or the computer class
     if mode == 1
@@ -132,13 +95,13 @@ until continue == "N"
       puts "Human x Human mode selected. Player 1: #{@player1.marker}
                              Player 2: #{@player2.marker}\n\n"
     elsif mode == 2
-      difficulty = game.select_difficulty
+      difficulty = Menu.select_difficulty
       @player1 = Player.new("O")
       @player2 = Computer.new("X")
       puts "Human x Computer mode selected. Player 1: #{@player1.marker}
                                 Computer: #{@player2.marker}\n\n"
     else
-      difficulty = game.select_difficulty
+      difficulty = Menu.select_difficulty
       @player1 = Computer.new("O")
       @player2 = Computer.new("X")
       puts "Computer x Computer mode selected. Computer 1: #{@player1.marker}
@@ -146,19 +109,9 @@ until continue == "N"
     end
     # asks the player to confirm if the way displayed at the menu is the way
     # he wants to play
-    puts "Is that how you want the game?(Y/N)\n "
-    confirmation = gets.chomp.capitalize
-    until (confirmation == "Y" || confirmation == "N")
-      puts "Invalid option, please choose a valid option.(Y/N)"
-      confirmation = gets.chomp.capitalize
-    end
+    confirmation = Menu.prompt("Is that how you want the game?(Y/N)\n")
   end
   game.start_game(mode, difficulty, @player1, @player2)
   # ask the player if the player wants to play again
-  puts "Do you want to play it again?(Y/N)"
-  continue = gets.chomp.capitalize
-  until (continue == "Y" || continue == "N")
-    puts "Invalid option, please choose a valid option.(Y/N)"
-    continue = gets.chomp.capitalize
-  end
+  continue = Menu.prompt("Do you want to play it again?(Y/N)")
 end
