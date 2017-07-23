@@ -2,23 +2,24 @@ class Computer
   attr_accessor :marker
   def initialize(marker)
     @marker = marker
-    opponent_marker
+    @opponent_marker = create_opponent_marker
   end
 
-  def opponent_marker
+  def create_opponent_marker
     if @marker  == "X"
-      @opponent_marker = "O"
+      return "O"
     else
-      @opponent_marker = "X"
+      return "X"
     end
   end
 
   def eval_board(board, difficulty)
     spot = nil
     until spot
-      # depending on the difficulty, it choose to do either a bad move or the best move
+      # depending on the selected difficulty and the total number of difficulties
+      # it choose to do either a random move or the best move possible
       if difficulty == "E"
-        spot = get_bad_move(board, marker)
+        spot = get_random_move(board, marker)
         draw_into_board(board, spot, marker)
       elsif difficulty =="N"
         spot = get_average_move(board, marker)
@@ -81,8 +82,8 @@ class Computer
     return available_spaces[n].to_i
   end
 
-  def get_bad_move(board, next_player)
-    bad_move = nil
+  def get_random_move(board, next_player)
+    random_move = nil
     available_spaces = get_available_spaces(board)
     n = rand(0..available_spaces.count)
     return available_spaces[n].to_i
@@ -90,7 +91,7 @@ class Computer
   def get_average_move(board, next_player)
     n = rand(0..100)
     if n < 50
-      return get_bad_move(board, @marker)
+      return get_random_move(board, @marker)
     else
       return get_best_move(board, @marker)
     end

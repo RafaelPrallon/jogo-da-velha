@@ -1,3 +1,4 @@
+require_relative "invalid_option_error"
 class Menu
 
   def self.select_game_mode
@@ -33,7 +34,7 @@ class Menu
     else
       puts "Hard mode selected"
     end
-    select_difficulty = difficulty
+    return difficulty
   end
 
   def self.confirm
@@ -49,7 +50,7 @@ class Menu
     return confirmation
   end
 
-  def self.prompt(prompt_text)
+  def prompt(prompt_text)
   # generic yes or no prompt function, initially will be used for the
   # confirmation and the continue menu
     prompt = nil
@@ -64,5 +65,30 @@ class Menu
     return prompt
   end
 
+  def get_input
+    return gets.chomp
+  end
 
+  def validate_input(options)
+    choice = self.get_input
+    unless options.include? choice
+      raise InvalidOptionError
+    end
+  end
+  def select_option(menu_text, options)
+    # will create a custom menu text based on the menu_test variable and
+    # the amount of options sent through the options array variable
+    options.each do |option|
+      menu_text << "#{option} \n"
+    end
+    puts menu_text
+    begin
+      choice = self.validate_input(options)
+    rescue InvalidOptionError
+      puts "Please enter a valid option."
+      puts menu_text
+      choice = self.validate_input(options)
+    end
+    return choice
+  end
 end
