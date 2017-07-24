@@ -1,42 +1,7 @@
 require_relative "invalid_option_error"
 class Menu
 
-  def self.select_game_mode
-    # player enter a number between 1 and 3 to choose game mode
-    mode = nil
-    until (mode == 1 || mode == 2 || mode == 3)
-      puts "Select game mode:
-            1. Human x Human
-            2. Human x PC
-            3. PC X PC"
-      mode = gets.chomp.to_i
-      if (mode != 1 && mode != 2 && mode != 3)
-        puts "Invalid option"
-      end
-    end
-    return mode
-  end
-
-  def self.select_difficulty
-    difficulty = nil
-    until (difficulty == "E" || difficulty == "N" || difficulty == "H")
-      puts "Please select difficulty:
-                            E: Easy mode
-                            N: Normal mode
-                            H: Hard mode"
-      difficulty = gets.chomp.to_s.capitalize
-      if (difficulty != "E" && difficulty !="H" && difficulty != "N")
-        puts "Invalid option"
-      end
-    end
-    if difficulty == "E"
-      puts "Easy mode selected"
-    else
-      puts "Hard mode selected"
-    end
-    return difficulty
-  end
-
+=begin
   def self.confirm
     confirmation = nil
     puts "Is that how you want the game?(Y/N)\n "
@@ -64,9 +29,9 @@ class Menu
     end
     return prompt
   end
-
+=end
   def get_input
-    return gets.chomp
+    return STDIN.gets.chomp
   end
 
   def validate_input(options)
@@ -74,6 +39,7 @@ class Menu
     unless options.include? choice
       raise InvalidOptionError
     end
+    return choice
   end
   def select_option(menu_text, options)
     # will create a custom menu text based on the menu_test variable and
@@ -91,4 +57,11 @@ class Menu
     end
     return choice
   end
+
+  def select_difficulty
+    difficulties = ["Easy", "Normal", "Hard"]
+    difficulty = select_option("Please select difficulty\n", difficulties)
+    return difficulty
+  end
+
 end
