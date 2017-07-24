@@ -9,19 +9,33 @@ RSpec.describe Player do
     end
   end
   describe "#validate_input" do
+
     it "should raise InvalidOptionError if not integer" do
       allow(player).to  receive(:get_input).and_return "c"
       expect{player.validate_input}.to raise_error(InvalidOptionError)
     end
+
     it "should raise InvalidOptionError if bigger than 8" do
       allow(player).to  receive(:get_input).and_return "9"
       expect{player.validate_input}.to raise_error(InvalidOptionError)
     end
+
     it "should raise InvalidOptionError if smaller than 0" do
       allow(player).to  receive(:get_input).and_return "-1"
       expect{player.validate_input}.to raise_error(InvalidOptionError)
     end
-    it "should return the input" do
+
+    it "should return input if input = 8" do
+      allow(player).to  receive(:get_input).and_return "8"
+      expect(player.validate_input).to eq("8")
+    end
+
+    it "should return input if input = 0" do
+      allow(player).to  receive(:get_input).and_return "0"
+      expect(player.validate_input).to eq("0")
+    end
+
+    it "should return the input otherwise" do
       allow(player).to  receive(:get_input).and_return "1"
       expect(player.validate_input).to eq("1")
     end

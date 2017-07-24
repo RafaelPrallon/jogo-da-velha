@@ -2,12 +2,14 @@ require "menu"
 
 describe Menu do
   let :menu {Menu.new}
+
   describe "#new" do
     it "should return a Menu instance" do
       menu = Menu.new
       expect(menu).to   be_instance_of Menu
     end
   end
+
   describe "#get_input" do
     it "gets input" do
       allow(STDIN).to   receive(:gets).and_return "teste\n"

@@ -15,7 +15,7 @@ class Computer
   end
   def get_play(board)
     spot = eval_board(board, @difficulty)
-    draw_into_board(board,spot,@marker)
+    draw_into_board(board,spot)
   end
   def eval_board(board, difficulty)
     spot = nil
@@ -34,13 +34,9 @@ class Computer
     return spot
   end
 
-  def draw_into_board(board, spot, marker)
+  def draw_into_board(board, spot)
     # it will draw in the board at the position spot if available
-    if board[spot] != "X" && board[spot] != "O"
-        board[spot] = marker
-        else
-        spot = nil
-    end
+    board[spot] = @marker
   end
 
   def get_available_spaces(board)
@@ -78,22 +74,23 @@ class Computer
           end
         end
       end
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
+      n = Kernel.rand(0..available_spaces.count)
+      best_move = available_spaces[n].to_i
     end
+    return best_move
   end
 
   def get_random_move(board)
     available_spaces = get_available_spaces(board)
-    n = rand(0..available_spaces.count)
+    n = Kernel.rand(0..available_spaces.count)
     return available_spaces[n].to_i
   end
   def get_average_move(board)
-    n = rand(0..100)
+    n = Kernel.rand(0..100)
     if n < 50
-      return get_random_move(board, @marker)
+      return get_random_move(board)
     else
-      return get_best_move(board, @marker)
+      return get_best_move(board)
     end
   end
 end

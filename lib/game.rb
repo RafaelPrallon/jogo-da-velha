@@ -4,11 +4,20 @@ class Game
   require_relative 'menu'
 
   def initialize
-    @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @difficulty = nil
-    @result = "defeat"
+    @board = set_board
+    result = "defeat"
   end
 
+  def set_board
+    board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    return board
+  end
+  def set_turn(last_turn)
+    if last_turn == 1
+      return 2
+    else return 1
+    end
+  end
   def self.game_is_over(b)
     # checks if a line at the board is drawn with only one symbol
     [b[0], b[1], b[2]].uniq.length == 1 ||
@@ -31,10 +40,12 @@ class Game
   end
 
   def start_game(player1, player2)
+    last_turn = 2
     # at the beggining of each turn, it will print the board
     print_board(@board)
     # loop through until the game was won or tied
     until Game.game_is_over(@board) || Game.tie(@board)
+=begin
       # given the game mode, it will alternate between player's and pc's turn
       puts "Player 1, choose a place in the board pressing a number between 0 and 8.:"
       player1.get_play(@board)
@@ -52,7 +63,7 @@ class Game
         result = "tie"
         # last_turn = 3
       end
-=begin
+=end
       if set_turn(last_turn) == 1
         puts "Player 1, choose a place in the board pressing a number between 0 and 8.:"
         player1.get_play(@board)
@@ -62,19 +73,21 @@ class Game
         player2.get_play(@board)
         last_turn = 2
       end
-      Board.print_board
-=end
+      print_board(@board)
     end
-    display_results(result)
+    if Game.tie(@board)
+      last_turn = 3
+    end
+    display_results(last_turn)
   end
 
-  def display_results(result)
-    if result == "victory"
+  def display_results(last_turn)
+    if last_turn == 1
       puts "Player 1 wins\n"
-    elsif result == "tie"
-      puts "It's a draw\n"
-    else
+    elsif last_turn == 2
       puts "Player 2 wins\n"
+    else
+      puts "It's a draw\n"
     end
 =begin
     if last_turn == 1

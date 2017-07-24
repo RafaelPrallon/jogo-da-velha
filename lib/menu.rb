@@ -1,35 +1,6 @@
 require_relative "invalid_option_error"
 class Menu
 
-=begin
-  def self.confirm
-    confirmation = nil
-    puts "Is that how you want the game?(Y/N)\n "
-    until confirmation
-      confirmation = gets.chomp.capitalize
-      unless (confirmation == "Y" || confirmation == "N")
-        puts "Invalid option, please choose a valid option.(Y/N)"
-        confirmation = nil
-      end
-    end
-    return confirmation
-  end
-
-  def prompt(prompt_text)
-  # generic yes or no prompt function, initially will be used for the
-  # confirmation and the continue menu
-    prompt = nil
-    puts prompt_text
-    until prompt
-      prompt = gets.chomp.capitalize
-      unless (prompt == "Y" || prompt == "N")
-        puts "Invalid option, please choose a valid option.(Y/N)"
-        prompt = nil
-      end
-    end
-    return prompt
-  end
-=end
   def get_input
     return STDIN.gets.chomp
   end
@@ -41,6 +12,7 @@ class Menu
     end
     return choice
   end
+
   def select_option(menu_text, options)
     # will create a custom menu text based on the menu_test variable and
     # the amount of options sent through the options array variable

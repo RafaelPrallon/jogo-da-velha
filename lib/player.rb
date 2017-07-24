@@ -19,7 +19,7 @@ class Player
   end
 
   def is_too_big? string
-    true if string.to_i >= 8 rescue false
+    true if string.to_i > 8 rescue false
   end
 
   def validate_input
