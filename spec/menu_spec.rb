@@ -3,14 +3,14 @@ require "menu"
 describe Menu do
   let :menu {Menu.new}
 
-  describe "#new" do
+  describe ".new" do
     it "should return a Menu instance" do
       menu = Menu.new
       expect(menu).to   be_instance_of Menu
     end
   end
 
-  describe "#get_input" do
+  describe ".get_input" do
     it "gets input" do
       allow(STDIN).to   receive(:gets).and_return "teste\n"
       expect(STDIN).to  receive(:gets)
@@ -18,7 +18,7 @@ describe Menu do
     end
   end
 
-  describe "#validate_input" do
+  describe ".validate_input" do
     it "should raise InvalidOptionError" do
       options = ["a", "b"]
       allow(menu).to  receive(:get_input).and_return "c"
@@ -31,7 +31,7 @@ describe Menu do
     end
   end
 
-  describe "#select_option" do
+  describe ".select_option" do
     it "should raise InvalidOptionError" do
       menu_text = "Test?\n"
       options = ["a", "b"]
@@ -46,7 +46,7 @@ describe Menu do
     end
   end
 
-  describe "#select_difficulty" do
+  describe ".select_difficulty" do
     it "should return the chosen difficulty" do
       allow(menu).to  receive(:validate_input).and_return "Easy"
       expect(menu.select_difficulty).to eq("Easy")

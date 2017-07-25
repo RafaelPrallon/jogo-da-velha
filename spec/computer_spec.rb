@@ -2,7 +2,7 @@ require "game"
 describe Computer do
   let :computer {Computer.new("O","Easy")}
 
-  describe "opponent_marker" do
+  describe ".opponent_marker" do
 
     it "should return X if computer marker is 'O'" do
       expect(computer.create_opponent_marker).to     eq("X")
@@ -10,7 +10,7 @@ describe Computer do
 
   end
 
-  describe "eval_board" do
+  describe ".eval_board" do
 
     it "A spot should be chosen at random if difficulty == 'Easy'" do
       board = ["0", "1", "2", "X", "X", "5", "O", "O", "X"]
@@ -36,7 +36,7 @@ describe Computer do
 
   end
 
-  describe "get_best_move" do
+  describe ".get_best_move" do
     it "should return 4 if board[4] is available" do
       computer = Computer.new("O","Hard")
       board = ["0", "1", "2", "X", "4", "5", "O", "O", "X"]
@@ -57,7 +57,7 @@ describe Computer do
   end
 
 
-  describe "get_average_move" do
+  describe ".get_average_move" do
 
     it "should return get_random_move if rand return a value smaller than 50" do
       computer = Computer.new("O", "Normal")
@@ -85,7 +85,7 @@ describe Computer do
 
   end
 
-  describe "get_available_spaces" do
+  describe ".get_available_spaces" do
     it "should return an empty array it the board is full" do
       board = ["O", "X", "X", "X", "X", "O", "O", "O", "X"]
       av_mv = computer.get_available_spaces(board)
@@ -97,7 +97,7 @@ describe Computer do
     end
   end
 
-  describe "draw_into_board" do
+  describe ".draw_into_board" do
     it "should draw into the board if the spot is available" do
       board = ["0", "1", "2", "X", "X", "5", "O", "O", "X"]
       computer.draw_into_board(board, 5)

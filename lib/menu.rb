@@ -32,7 +32,7 @@ class Menu
 
   def select_difficulty
     difficulties = ["Easy", "Normal", "Hard"]
-    difficulty = select_option("Please select difficulty\n", difficulties)
+    difficulty = select_option("\nPlease select difficulty\n", difficulties)
     return difficulty
   end
 
