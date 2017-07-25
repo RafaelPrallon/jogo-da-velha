@@ -5,7 +5,7 @@ Para executar a aplicação, execute os seguintes comandos:
 
 git clone https://github.com/RafaelPrallon/jogo-da-velha.git
 
-ruby game.rb
+ruby main.rb
 
 Pontos tratados: 
 
@@ -20,6 +20,10 @@ Pontos tratados:
 -> Adição da opção de se iniciar uma nova partida no final da partida anterior
 
 -> Remoção de variáveis não utilizadas na função de pegar melhor jogada
+
+-> Adição de testes automáticos em todas as classes
+
+-> Adição de uma classe específica para os menus do jogo
 
 Coisas a tratar:
 
